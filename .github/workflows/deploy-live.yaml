@@ -1,0 +1,82 @@
+name: Deploy Live
+on: 
+  workflow_dispatch:
+  push:
+    tags:
+      - release*
+jobs:
+  backup:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_CLI_TTY: 0
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler: "latest"
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli @shopify/theme
+      - name: Checkout theme source from git repo
+        uses: actions/checkout@v4  
+      #
+      # Deploy store 1
+      #
+      - name: 'Push to live theme at ${{ vars.STORE_1_NAME }}'
+        env:
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_1_URL }}'
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_1_PASSWORD }}
+        run: shopify theme push --live --allow-live  ${{ vars.IGNORE_FILES }}
+      #
+      # Deploy store 2
+      #
+      - name: 'Push to live theme at ${{ vars.STORE_2_NAME }}'
+        env:
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_2_URL }}'
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_2_PASSWORD }}
+        run: shopify theme push --live --allow-live  ${{ vars.IGNORE_FILES }}
+      #
+      # Deploy store 3
+      #
+      - name: 'Push to live theme at ${{ vars.STORE_3_NAME }}'
+        env:
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_3_URL }}'
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_3_PASSWORD }}
+        run: shopify theme push --live --allow-live  ${{ vars.IGNORE_FILES }}
+      #
+      # Deploy store 4
+      #
+      - name: 'Push to live theme at ${{ vars.STORE_4_NAME }}'
+        env:
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_4_URL }}'
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_4_PASSWORD }}
+        run: shopify theme push --live --allow-live  ${{ vars.IGNORE_FILES }}
+      #
+      # Deploy store 5
+      #
+      - name: 'Push to live theme at ${{ vars.STORE_5_NAME }}'
+        env:
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_5_URL }}'
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_5_PASSWORD }}
+        run: shopify theme push --live --allow-live  ${{ vars.IGNORE_FILES }}
+      #
+      # Deploy store 0
+      #
+      - name: 'Push to live theme at ${{ vars.STORE_0_NAME }}'
+        env:
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_0_URL }}'
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_0_PASSWORD }}
+        run: | 
+          shopify theme push --live --allow-live  ${{ vars.IGNORE_FILES }}
+          shopify theme pull --live ${{ vars.CONFIG_FILES }}
+      - name: Zip config files
+        run: zip release.zip ./* -r
+      - name: Upload config file archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: release.zip
+      

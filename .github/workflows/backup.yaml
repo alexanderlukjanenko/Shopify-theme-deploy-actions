@@ -1,0 +1,127 @@
+name: Backup Live Configs
+on: 
+  schedule:
+    - cron: "2 2 * * 6"
+  workflow_dispatch:
+jobs:
+  backup:
+    name: Backup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler: "latest"
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli @shopify/theme
+#
+# Backup store 0
+#
+      - name: 'Get config files from store ${{ vars.STORE_0_NAME }}'
+        env:
+          # Store URL, like your-store.myshopify.com
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_0_URL }}'
+          # Password generated from Theme Access app
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_0_PASSWORD }}
+          SHOPIFY_CLI_TTY: 0
+        run: shopify theme pull --live ${{ vars.BACKUP_FILES }} --path ./backup-${{ vars.STORE_0_NAME }}
+      - name: Zip config files
+        run: zip backup-${{ vars.STORE_0_NAME }}.zip ./backup-${{ vars.STORE_0_NAME }}/* -r
+      - name: Upload config file archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ vars.STORE_0_NAME }}
+          path: backup-${{ vars.STORE_0_NAME }}.zip
+#
+# Backup store 1
+#
+      - name: 'Get config files from store ${{ vars.STORE_1_NAME }}'
+        env:
+          # Store URL, like your-store.myshopify.com
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_1_URL }}'
+          # Password generated from Theme Access app
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_1_PASSWORD }}
+          SHOPIFY_CLI_TTY: 0
+        run: shopify theme pull --live ${{ vars.BACKUP_FILES }} --path ./backup-${{ vars.STORE_1_NAME }}
+      - name: Zip config files
+        run: zip backup-${{ vars.STORE_1_NAME }}.zip ./backup-${{ vars.STORE_1_NAME }}/* -r
+      - name: Upload artifact for storing
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ vars.STORE_1_NAME }}
+          path: backup-${{ vars.STORE_1_NAME }}.zip
+#
+# Backup store 2
+#
+      - name: 'Get config files from store ${{ vars.STORE_2_NAME }}'
+        env:
+          # Store URL, like your-store.myshopify.com
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_2_URL }}'
+          # Password generated from Theme Access app
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_2_PASSWORD }}
+          SHOPIFY_CLI_TTY: 0
+        run: shopify theme pull --live ${{ vars.BACKUP_FILES }} --path ./backup-${{ vars.STORE_2_NAME }}
+      - name: Zip config files
+        run: zip backup-${{ vars.STORE_2_NAME }}.zip ./backup-${{ vars.STORE_2_NAME }}/* -r
+      - name: Upload artifact for storing
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ vars.STORE_2_NAME }}
+          path: backup-${{ vars.STORE_2_NAME }}.zip
+#
+# Backup store 3
+#
+      - name: 'Get config files from store ${{ vars.STORE_3_NAME }}'
+        env:
+          # Store URL, like your-store.myshopify.com
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_3_URL }}'
+          # Password generated from Theme Access app
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_3_PASSWORD }}
+          SHOPIFY_CLI_TTY: 0
+        run: shopify theme pull --live ${{ vars.BACKUP_FILES }} --path ./backup-${{ vars.STORE_3_NAME }}
+      - name: Zip config files
+        run: zip backup-${{ vars.STORE_3_NAME }}.zip ./backup-${{ vars.STORE_3_NAME }}/* -r
+      - name: Upload artifact for storing
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ vars.STORE_3_NAME }}
+          path: backup-${{ vars.STORE_3_NAME }}.zip
+#
+# Backup store 4
+#
+      - name: 'Get config files from store ${{ vars.STORE_4_NAME }}'
+        env:
+          # Store URL, like your-store.myshopify.com
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_4_URL }}'
+          # Password generated from Theme Access app
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_4_PASSWORD }}
+          SHOPIFY_CLI_TTY: 0
+        run: shopify theme pull --live ${{ vars.BACKUP_FILES }} --path ./backup-${{ vars.STORE_4_NAME }}
+      - name: Zip config files
+        run: zip backup-${{ vars.STORE_4_NAME }}.zip ./backup-${{ vars.STORE_4_NAME }}/* -r
+      - name: Upload artifact for storing
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ vars.STORE_4_NAME }}
+          path: backup-${{ vars.STORE_4_NAME }}.zip
+#
+# Backup store 5
+#
+      - name: 'Get config files from store ${{ vars.STORE_5_NAME }}'
+        env:
+          # Store URL, like your-store.myshopify.com
+          SHOPIFY_FLAG_STORE: '${{ vars.STORE_5_URL }}'
+          # Password generated from Theme Access app
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_5_PASSWORD }}
+          SHOPIFY_CLI_TTY: 0
+        run: shopify theme pull --live ${{ vars.BACKUP_FILES }} --path ./backup-${{ vars.STORE_5_NAME }}
+      - name: Zip config files
+        run: zip backup-${{ vars.STORE_5_NAME }}.zip ./backup-${{ vars.STORE_5_NAME }}/* -r
+      - name: Upload artifact for storing
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ vars.STORE_5_NAME }}
+          path: backup-${{ vars.STORE_5_NAME }}.zip

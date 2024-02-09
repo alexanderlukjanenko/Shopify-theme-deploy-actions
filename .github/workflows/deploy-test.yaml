@@ -1,0 +1,109 @@
+name: Deploy Test
+on: 
+  workflow_dispatch:
+  push:
+    tags:
+      - test*
+jobs:
+  ######
+  # 0
+  #
+  deploy-store-0:
+    name: Deploy on ${{ vars.STORE_0_NAME }}
+    runs-on: ubuntu-latest
+    env:
+      # Store URL, like your-store.myshopify.com
+      SHOPIFY_FLAG_STORE: '${{ vars.STORE_0_URL }}'
+      # Password generated from Theme Access app
+      SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_0_PASSWORD }}
+      SHOPIFY_CLI_TTY: 0
+    steps:
+      - id: deploy
+        uses: alexanderlukjanenko/deploy-and-copy-configs@v1
+      - name: Add job summary
+        run: echo "${{ vars.STORE_0_NAME }} | ${{ vars.STORE_0_URL }} | ${{ steps.deploy.outputs.preview-theme-id }}" >> $GITHUB_STEP_SUMMARY
+  ######
+  # 1
+  #
+  deploy-store-1:
+    name: Deploy on ${{ vars.STORE_1_NAME }}
+    runs-on: ubuntu-latest
+    env:
+      # Store URL, like your-store.myshopify.com
+      SHOPIFY_FLAG_STORE: '${{ vars.STORE_1_URL }}'
+      # Password generated from Theme Access app
+      SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_1_PASSWORD }}
+      SHOPIFY_CLI_TTY: 0
+    steps:
+      - id: deploy
+        uses: alexanderlukjanenko/deploy-and-copy-configs@v1
+      - name: Add job summary
+        run: echo "${{ vars.STORE_1_NAME }} | ${{ vars.STORE_1_URL }} | ${{ steps.deploy.outputs.preview-theme-id }}" >> $GITHUB_STEP_SUMMARY
+  ######
+  # 2
+  #
+  deploy-store-2:
+    name: Deploy on ${{ vars.STORE_2_NAME }}
+    runs-on: ubuntu-latest
+    env:
+      # Store URL, like your-store.myshopify.com
+      SHOPIFY_FLAG_STORE: '${{ vars.STORE_2_URL }}'
+      # Password generated from Theme Access app
+      SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_2_PASSWORD }}
+      SHOPIFY_CLI_TTY: 0
+    steps:
+      - id: deploy
+        uses: alexanderlukjanenko/deploy-and-copy-configs@v1
+      - name: Add job summary
+        run: echo "${{ vars.STORE_2_NAME }} | ${{ vars.STORE_2_URL }} | ${{ steps.deploy.outputs.preview-theme-id }}" >> $GITHUB_STEP_SUMMARY
+  ######
+  # 3
+  #
+  deploy-store-3:
+    name: Deploy on ${{ vars.STORE_3_NAME }}
+    runs-on: ubuntu-latest
+    env:
+      # Store URL, like your-store.myshopify.com
+      SHOPIFY_FLAG_STORE: '${{ vars.STORE_3_URL }}'
+      # Password generated from Theme Access app
+      SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_3_PASSWORD }}
+      SHOPIFY_CLI_TTY: 0
+    steps:
+      - id: deploy
+        uses: alexanderlukjanenko/deploy-and-copy-configs@v1
+      - name: Add job summary
+        run: echo "${{ vars.STORE_3_NAME }} | ${{ vars.STORE_3_URL }} | ${{ steps.deploy.outputs.preview-theme-id }}" >> $GITHUB_STEP_SUMMARY
+  ######
+  # 4
+  #
+  deploy-store-4:
+    name: Deploy on ${{ vars.STORE_4_NAME }}
+    runs-on: ubuntu-latest
+    env:
+      # Store URL, like your-store.myshopify.com
+      SHOPIFY_FLAG_STORE: '${{ vars.STORE_4_URL }}'
+      # Password generated from Theme Access app
+      SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_4_PASSWORD }}
+      SHOPIFY_CLI_TTY: 0
+    steps:
+      - id: deploy
+        uses: alexanderlukjanenko/deploy-and-copy-configs@v1
+      - name: Add job summary
+        run: echo "${{ vars.STORE_4_NAME }} | ${{ vars.STORE_4_URL }} | ${{ steps.deploy.outputs.preview-theme-id }}" >> $GITHUB_STEP_SUMMARY
+  ######
+  # 5
+  #
+  deploy-store-5:
+    name: Deploy on ${{ vars.STORE_5_NAME }}
+    runs-on: ubuntu-latest
+    env:
+      # Store URL, like your-store.myshopify.com
+      SHOPIFY_FLAG_STORE: '${{ vars.STORE_5_URL }}'
+      # Password generated from Theme Access app
+      SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.STORE_5_PASSWORD }}
+      SHOPIFY_CLI_TTY: 0
+    steps:
+      - id: deploy
+        uses: alexanderlukjanenko/deploy-and-copy-configs@v1
+      - name: Add job summary
+        run: echo "${{ vars.STORE_5_NAME }} | ${{ vars.STORE_5_URL }} | ${{ steps.deploy.outputs.preview-theme-id }}" >> $GITHUB_STEP_SUMMARY
