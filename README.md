@@ -52,28 +52,28 @@ Create a tag with "test" prefix to triger this action.
 
 ## Variables
 ### **BACKUP_FILES** 
-List of configuration files to copy. Using the **--only** flag for ```shopify theme pull``` command.
+List of configuration files to copy. Using the **--only** flag for ```shopify theme pull``` command. __
 Example: --only templates/\*.json --only config/\* --only sections/\*.json
 
 ### **CONFIG_FILES** 
-List of configuration files to merge during test deploy.
+List of configuration files to merge during test deploy.__
 Example: --only templates/\*.json --only sections/\*.json --only config/settings_data.json
 
 ### **IGNORE_FILES** 
-List of configuration files to ignore during live deploy. Using the **--ignore** flag for ```shopify theme push``` command.
+List of configuration files to ignore during live deploy. Using the **--ignore** flag for ```shopify theme push``` command.__
 Example: --ignore config/settings_data.json --ignore templates/\*.json --ignore sections/\*.json --ignore snippets/svg-logo.liquid --ignore config.yml
 
 ### **STORE_0_NAME** 
-Short name for the store. Add the same variable per each store: STORE_1_NAME, STORE_2_NAME, STORE_3_NAME, STORE_4_NAME, STORE_5_NAME.
+Short name for the store. Add the same variable per each store: STORE_1_NAME, STORE_2_NAME, STORE_3_NAME, STORE_4_NAME, STORE_5_NAME.__
 Example: Default
 
 ### **STORE_0_URL** 
-Store URL, like your-store.myshopify.com. Add the same variable per each store: STORE_1_URL, STORE_2_URL, STORE_3_URL, STORE_4_URL, STORE_5_URL
+Store URL, like your-store.myshopify.com. Add the same variable per each store: STORE_1_URL, STORE_2_URL, STORE_3_URL, STORE_4_URL, STORE_5_URL__
 Example: your-store.myshopify.com
 
 ## Secrets
 ### **STORE_0_PASSWORD** 
-Password generated from Theme Access app. More details about the Theme Access app - https://shopify.dev/docs/themes/tools/theme-access. Add the same variable per each store: STORE_1_PASSWORD, STORE_2_PASSWORD, STORE_3_PASSWORD, STORE_4_PASSWORD, STORE_5_PASSWORD.
+Password generated from Theme Access app. More details about the Theme Access app - https://shopify.dev/docs/themes/tools/theme-access. Add the same variable per each store: STORE_1_PASSWORD, STORE_2_PASSWORD, STORE_3_PASSWORD, STORE_4_PASSWORD, STORE_5_PASSWORD.__
 Example: shptka_dd99999d9999aa555555555c777c2222
 
 
